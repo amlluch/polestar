@@ -8,11 +8,11 @@ Docker installation:
 
 3) <strong>Migrate database:</strong> docker-compose run --rm polestar /bin/bash -c "cd polestar; ./manage.py migrate"
 
-4) <strong>Migrate restapi app database:</strong><br>
+4) <strong>Migrate restapi app database (if necessary):</strong><br>
 docker-compose run --rm polestar /bin/bash -c "cd polestar; ./manage.py makemigrations restapi"<br>
 docker-compose run --rm polestar /bin/bash -c "cd polestar; ./manage.py migrate restapi"<br>
 
-Now you can run in a docker and play. If you want to change the postgres user and postgres passowrd change it inside config/db/database_env (before building the docker image) and the environment variables within docker-composition.yml file.
+Now you can run in a docker and play. If you want to change the postgres user and postgres passowrd change it inside config/db/database_env (before building the docker image).
 
 The docker image uses gunicorn on port 8000
 
