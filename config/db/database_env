@@ -1,0 +1,3 @@
+POSTGRES_USER=polestar
+POSTGRES_PASSWORD=polestar
+POSTGRES_DB=polestar_db
