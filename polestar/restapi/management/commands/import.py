@@ -30,7 +30,6 @@ class Command(BaseCommand):
             try:
                 result = positions.update()
             except ResponseException as err:
-#                    raise CommandError(err.message['details'])
                 self.stdout.write(self.style.ERROR(err.message['details']))
                 continue
             if options['prefix']:
@@ -41,7 +40,6 @@ class Command(BaseCommand):
                 try:
                     jsonfile = open(import_path_file + prefix + os.path.basename(file) + '.json', 'w')
                 except IOError as err:
-#                        raise CommandError('Can\'t create file {file}'.format(file=prefix + file + '.json'))
                     self.stdout.write(self.style.ERROR(err.strerror))
                     continue
                 with jsonfile:
@@ -52,4 +50,16 @@ class Command(BaseCommand):
                         mylines = ''.join('"' + line.rstrip('\n') + '",'  for line in result['lines'] )
                         jsonfile.write('[' + mylines + ']' + ',')
                     jsonfile.write('}')
+            if options['csv']:
+                try:
+                    csvfile = open(import_path_file + prefix + os.path.basename(file) + '.csv', 'w')
+                except IOError as err:
+                    self.stdout.write(self.style.ERROR(err.strerror))
+                    continue
+                with csvfile:
+                    csvfile.write('details: ' + result['details'] + '\n')
+                    if 'errors' in result:
+                        csvfile.write('errors: ' + result['errors'] + '\n')
+                        csvfile.write('lines: \n')
+                        csvfile.write(''.join(result['lines']))
             self.stdout.write(self.style.SUCCESS(result['details'] + ' from file {file}'.format(file=import_file)))
