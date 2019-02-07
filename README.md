@@ -20,6 +20,8 @@ Ship codes are assumed to be 7 digit numbers. To import position data http://loc
 During the import process the erroneous elements are discarded showing a list of those discarded in the response. 
 The import process uploads a file that it deletes once the process has finished.
 
+You can import files inside the container: <strong>docker-compose run --rm polestar /bin/bash -c "cd polestar; ./manage.py import path-to-file-to-import"</strong>. You can import as many files as you want at same time (more options with --help).
+
 In the endpoint of the list of ships (api/ships) a "post" has been added to register ships. 
 This post checks that the code is correct and that the boat does not exist.
 
